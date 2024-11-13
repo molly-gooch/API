@@ -83,6 +83,8 @@ public class ReadJson {
 
             String name = (String)jsonObject.get("name");
             String mass = (String)jsonObject.get("mass");
+            String eye = (String)jsonObject.get("eye_color");
+            String birth = (String)jsonObject.get("birth_year");
 
             org.json.simple.JSONArray msg = (org.json.simple.JSONArray) jsonObject.get("films");
             int n =   msg.size(); //(msg).length();
@@ -94,6 +96,15 @@ public class ReadJson {
             String height= (String)jsonObject.get("height");
             System.out.println(name);
             System.out.println(mass);
+            System.out.println(eye);
+            System.out.println(birth);
+
+            org.json.simple.JSONArray starships = (org.json.simple.JSONArray) jsonObject.get("starships");
+            int b = starships.size();
+            for(int w = 0; w<b;w++){
+                String test2 = (String)starships.get(w);
+                System.out.println(test2);
+            }
         }
 
         catch (Exception e) {
