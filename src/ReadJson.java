@@ -44,7 +44,7 @@ public class ReadJson {
         String totlaJson="";
         try {
 
-            URL url = new URL("https://swapi.dev/api/people/4/");
+            URL url = new URL("https://pokeapi.co/api/v2/pokemon/ditto");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Accept", "application/json");
@@ -82,29 +82,30 @@ public class ReadJson {
         try {
 
             String name = (String)jsonObject.get("name");
-            String mass = (String)jsonObject.get("mass");
+
+
             String eye = (String)jsonObject.get("eye_color");
             String birth = (String)jsonObject.get("birth_year");
+            System.out.println();
 
-            org.json.simple.JSONArray msg = (org.json.simple.JSONArray) jsonObject.get("films");
-            int n =   msg.size(); //(msg).length();
+            org.json.simple.JSONArray ab = (org.json.simple.JSONArray) jsonObject.get("abilities");
+            int n =   ab.size(); //(msg).length();a
             for (int i = 0; i < n; ++i) {
-                String test =(String) msg.get(i);
-                System.out.println(test);
-                // System.out.println(person.getInt("key"));
-            }
-            String height= (String)jsonObject.get("height");
-            System.out.println(name);
-            System.out.println(mass);
-            System.out.println(eye);
-            System.out.println(birth);
+                JSONObject test =(JSONObject) ab.get(i);
+                JSONObject ability = (JSONObject)test.get("ability");
+                System.out.println("Ability name: " + ability.get("name"));
 
-            org.json.simple.JSONArray starships = (org.json.simple.JSONArray) jsonObject.get("starships");
-            int b = starships.size();
-            for(int w = 0; w<b;w++){
-                String test2 = (String)starships.get(w);
-                System.out.println(test2);
             }
+
+            System.out.println("Character Name: " + name);
+
+//            org.json.simple.JSONArray starships = (org.json.simple.JSONArray) jsonObject.get("");
+//            int b = starships.size();
+//            for(int w = 0; w<b;w++){
+//                String test2 = (String)starships.get(w);
+//                System.out.println(test2);
+//            }
+
         }
 
         catch (Exception e) {
