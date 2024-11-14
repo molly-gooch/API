@@ -99,6 +99,19 @@ public class ReadJson {
 
             System.out.println("Character Name: " + name);
 
+            org.json.simple.JSONArray forms = (org.json.simple.JSONArray) jsonObject.get("forms");
+            int f = forms.size();
+            for(int i=0;i<f;i=i+1){
+                JSONObject test2 = (JSONObject) forms.get(i);
+                String names = (String) test2.get("name");
+                String links = (String) test2.get("url");
+                System.out.println("Form name: " + names);
+                System.out.println("Form link: " + links);
+//                JSONObject form = (JSONObject)test2.get("name");
+//                System.out.println("Form name: "+ form);
+            }
+
+
 //            org.json.simple.JSONArray starships = (org.json.simple.JSONArray) jsonObject.get("");
 //            int b = starships.size();
 //            for(int w = 0; w<b;w++){
