@@ -13,8 +13,11 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import javax.swing.*;
+
 // Program for print data in JSON format.
 public class ReadJson {
+
     public static void main(String args[]) throws ParseException {
         // In java JSONObject is used to create JSON object
         // which is a subclass of java.util.HashMap.
@@ -94,7 +97,6 @@ public class ReadJson {
                 JSONObject test =(JSONObject) ab.get(i);
                 JSONObject ability = (JSONObject)test.get("ability");
                 System.out.println("Ability name: " + ability.get("name"));
-
             }
 
             System.out.println("Character Name: " + name);
@@ -107,8 +109,7 @@ public class ReadJson {
                 String links = (String) test2.get("url");
                 System.out.println("Form name: " + names);
                 System.out.println("Form link: " + links);
-//                JSONObject form = (JSONObject)test2.get("name");
-//                System.out.println("Form name: "+ form);
+//                
             }
 
 
