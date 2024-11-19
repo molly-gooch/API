@@ -10,11 +10,14 @@ public class Layout {
     private JPanel panel3;
     private JPanel panel4;
     private JPanel panel5;
+    private JPanel panel6;
     private JTextArea ta1;
     private JTextArea ta2;
+    private JTextArea ta3;
     private JLabel label1;
     private JLabel label2;
     private JLabel label3;
+    private JLabel label4;
 
 
     public Layout() {
@@ -32,25 +35,33 @@ public class Layout {
         panel3 = new JPanel();
         panel4 = new JPanel();
         panel5 = new JPanel();
+        panel6 = new JPanel();
         ta1 = new JTextArea();
         ta2 = new JTextArea();
+        ta3 = new JTextArea();
         label1 = new JLabel("Pokemon Name: ", JLabel.CENTER);
         label2 = new JLabel("Pokemon Info: ", JLabel.CENTER);
         label3 = new JLabel("Search New Pokemon: ", JLabel.CENTER);
+        label4 = new JLabel("Pokemon Image: ", JLabel.CENTER);
 
         mainFrame.setLayout(new GridLayout(2, 1));
         panel2.setLayout(new GridLayout(2,1));
         panel3.setLayout(new GridLayout(1,2));
         panel4.setLayout(new BorderLayout());
         panel5.setLayout(new BorderLayout());
+        panel6.setLayout(new BorderLayout());
 
         mainFrame.add(panel1);
+        panel1.add(label4);
         panel2.add(panel3);
         panel3.add(panel4);
         panel3.add(panel5);
         panel5.add(ta2, BorderLayout.CENTER);
         panel5.add(label2, BorderLayout.NORTH);
         mainFrame.add(panel2);
+        panel2.add(panel6);
+        panel6.add(label3, BorderLayout.NORTH);
+        panel6.add(ta3, BorderLayout.CENTER);
         panel4.add(label1, BorderLayout.NORTH);
         panel4.add(ta1, BorderLayout.CENTER);
 
