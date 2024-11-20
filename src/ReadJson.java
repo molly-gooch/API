@@ -36,6 +36,9 @@ public class ReadJson {
     private JLabel label3;
     private JLabel label4;
     private JButton button1;
+    private JButton button2;
+    private int WIDTH=800;
+    private int HEIGHT=700;
 
     public static void main(String args[]) throws ParseException {
         // In java JSONObject is used to create JSON object
@@ -54,18 +57,13 @@ public class ReadJson {
 
     }
 
-    public ReadJson(){
-        try {
-            pull();
-        }catch(Exception e){
-            System.out.println(e);
-        }
-
+    public ReadJson() {
         prepareGUI();
     }
 
     private void prepareGUI() {
         mainFrame = new JFrame("Pokedex");
+        mainFrame.setSize(WIDTH, HEIGHT);
         panel1 = new JPanel();
         panel2 = new JPanel();
         panel3 = new JPanel();
@@ -81,22 +79,35 @@ public class ReadJson {
         label4 = new JLabel("Pokemon Image: ", JLabel.CENTER);
 
         button1 = new JButton("Submit");
+        button2 = new JButton("Reset");
+        button1.setActionCommand("Submit");
+        button2.setActionCommand("Reset");
+        button1.addActionListener(new ButtonClickListener());
+        button2.addActionListener(new ButtonClickListener());
+        button1.setFont(new Font("Calibri", Font.BOLD, 30));
+        button2.setFont(new Font("Calibri", Font.BOLD, 30));
+        button2.setBackground(new Color(252, 22, 5));
+        button1.setBackground(new Color(0, 201, 27));
+        button1.setOpaque(true);
+        button2.setOpaque(true);
+        button1.setBorderPainted(false);
+        button2.setBorderPainted(false);
 
-        mainFrame.setLayout(new GridLayout(2, 1));
-        panel2.setLayout(new GridLayout(2,1));
-        panel3.setLayout(new GridLayout(1,2));
+        mainFrame.setLayout(new GridLayout(1, 1));
+        panel2.setLayout(new GridLayout(2, 1));
+        panel3.setLayout(new GridLayout(1, 2));
         panel4.setLayout(new BorderLayout());
-        panel5.setLayout(new BorderLayout());
+        panel5.setLayout(new GridLayout(2,1));
         panel6.setLayout(new BorderLayout());
 
 
-
-        mainFrame.add(panel1);
-        panel1.add(label4);
+        //mainFrame.add(panel1);
+        //panel1.add(label4);
         panel2.add(panel3);
         panel3.add(panel4);
         panel3.add(panel5);
         panel5.add(button1);
+        panel5.add(button2);
         //panel5.add(label2, BorderLayout.NORTH);
         mainFrame.add(panel2);
         panel2.add(panel6);
@@ -111,18 +122,18 @@ public class ReadJson {
 
     }
 
-    public  void pull() throws ParseException {
+    public void pull() throws ParseException {
         String output = "abc";
-        String totlaJson="";
+        String totlaJson = "";
 
         //how to get submit button to be action command
+
         String name1 = ta1.getText();
 
-        if(name1.contains("ditto")) {
 
             try {
 
-                URL url = new URL("https://pokeapi.co/api/v2/pokemon/ditto");
+                URL url = new URL("https://pokeapi.co/api/v2/pokemon/" + ta1.getText());
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Accept", "application/json");
@@ -167,15 +178,18 @@ public class ReadJson {
                 String birth = (String) jsonObject.get("birth_year");
                 System.out.println();
 
+                ta2.append("Character Name: " + name);
+                ta2.append("\n");
+
                 org.json.simple.JSONArray ab = (org.json.simple.JSONArray) jsonObject.get("abilities");
                 int n = ab.size(); //(msg).length();a
                 for (int i = 0; i < n; ++i) {
                     JSONObject test = (JSONObject) ab.get(i);
                     JSONObject ability = (JSONObject) test.get("ability");
                     ta2.append("Ability name: " + ability.get("name"));
+                    ta2.append("\n");
                 }
 
-                ta2.append("Character Name: " + name);
 
                 org.json.simple.JSONArray forms = (org.json.simple.JSONArray) jsonObject.get("forms");
                 int f = forms.size();
@@ -184,25 +198,57 @@ public class ReadJson {
                     String names = (String) test2.get("name");
                     String links = (String) test2.get("url");
                     ta2.append("Form name: " + names);
+                    ta2.append("\n");
                     ta2.append("Form link: " + links);
-//                
+                    ta2.append("\n");
                 }
 
+                org.json.simple.JSONArray type = (org.json.simple.JSONArray) jsonObject.get("types");
+                int t = type.size();
+                for (int i = 0; i < t; i = i + 1) {
+                    JSONObject test3 = (JSONObject) type.get(i);
+                    JSONObject types = (JSONObject) test3.get("type");
+                    String names = (String) types.get("name");
+                    ta2.append("Type: " + names);
+                    ta2.append("\n");
+                }
 
-//            org.json.simple.JSONArray starships = (org.json.simple.JSONArray) jsonObject.get("");
-//            int b = starships.size();
-//            for(int w = 0; w<b;w++){
-//                String test2 = (String)starships.get(w);
-//                System.out.println(test2);
-//            }
+                org.json.simple.JSONArray move = (org.json.simple.JSONArray) jsonObject.get("moves");
+                int m = type.size();
+                for (int i = 0; i < m; i = i + 1) {
+                    JSONObject test4 = (JSONObject) move.get(i);
+                    JSONObject moves = (JSONObject) test4.get("move");
+                    String movesy = (String) moves.get("name");
+                    ta2.append("Move: " + movesy);
+                    ta2.append("\n");
+                }
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
 
+
+    }
+
+    private class ButtonClickListener implements ActionListener {
+        public void actionPerformed(ActionEvent f) {
+            String command = f.getActionCommand();
+
+
+            if (command.equals("Submit")) {
+                try {
+                    pull();
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+            }
+            if(command.equals("Reset")){
+                ta2.setText("");
+                ta1.setText("");
+            }
+
+
         }
     }
 }
-
-
