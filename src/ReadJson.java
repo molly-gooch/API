@@ -172,21 +172,29 @@ public class ReadJson {
             try {
 
                 String name = (String) jsonObject.get("name");
+                Long weight = (Long) jsonObject.get("weight");
+                Long height = (Long) jsonObject.get("height");
 
 
                 String eye = (String) jsonObject.get("eye_color");
                 String birth = (String) jsonObject.get("birth_year");
                 System.out.println();
 
-                ta2.append("Character Name: " + name);
+                ta2.append("Pokemon name: " + name);
                 ta2.append("\n");
+                ta2.append("Pokemon weight: " + weight);
+                ta2.append("\n");
+                ta2.append("Pokemon height: " + height);
+                ta2.append("\n");
+
+
 
                 org.json.simple.JSONArray ab = (org.json.simple.JSONArray) jsonObject.get("abilities");
                 int n = ab.size(); //(msg).length();a
                 for (int i = 0; i < n; ++i) {
                     JSONObject test = (JSONObject) ab.get(i);
                     JSONObject ability = (JSONObject) test.get("ability");
-                    ta2.append("Ability name: " + ability.get("name"));
+                    ta2.append("Ability " + (i+1) + ": " + ability.get("name"));
                     ta2.append("\n");
                 }
 
@@ -196,11 +204,11 @@ public class ReadJson {
                 for (int i = 0; i < f; i = i + 1) {
                     JSONObject test2 = (JSONObject) forms.get(i);
                     String names = (String) test2.get("name");
-                    String links = (String) test2.get("url");
-                    ta2.append("Form name: " + names);
+                    //String links = (String) test2.get("url");
+                    ta2.append("Form " + (i+1) + ": " + names);
                     ta2.append("\n");
-                    ta2.append("Form link: " + links);
-                    ta2.append("\n");
+                   // ta2.append("Form link: " + links);
+                   // ta2.append("\n");
                 }
 
                 org.json.simple.JSONArray type = (org.json.simple.JSONArray) jsonObject.get("types");
@@ -209,7 +217,7 @@ public class ReadJson {
                     JSONObject test3 = (JSONObject) type.get(i);
                     JSONObject types = (JSONObject) test3.get("type");
                     String names = (String) types.get("name");
-                    ta2.append("Type: " + names);
+                    ta2.append("Type " + (i+1) + ": " + names);
                     ta2.append("\n");
                 }
 
@@ -219,7 +227,7 @@ public class ReadJson {
                     JSONObject test4 = (JSONObject) move.get(i);
                     JSONObject moves = (JSONObject) test4.get("move");
                     String movesy = (String) moves.get("name");
-                    ta2.append("Move: " + movesy);
+                    ta2.append("Move " + (i+1) + ": " + movesy);
                     ta2.append("\n");
                 }
 
